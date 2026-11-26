@@ -21,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.material3.TextField
 import com.example.moviecounter.ui.theme.MovieCounterTheme
 
 class MainActivity : ComponentActivity() {
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MovieCounter(modifier: Modifier = Modifier) {
     var count by remember { mutableStateOf(0) }
+    var movieName by remember { mutableStateOf("") }
 
     Column(
         modifier = modifier.padding(16.dp),
@@ -47,8 +49,19 @@ fun MovieCounter(modifier: Modifier = Modifier) {
     ) {
         Text(text = "You have added $count movies.")
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { count++ }) {
-            Text("Añadir película")
+        TextField(
+            value = movieName,
+            onValueChange = { movieName = it },
+            label = { Text("Movie Name") }
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = {
+            if (movieName.isNotBlank()) {
+                count++
+                movieName = ""
+            }
+        }) {
+            Text("Add Movie")
         }
     }
 }
