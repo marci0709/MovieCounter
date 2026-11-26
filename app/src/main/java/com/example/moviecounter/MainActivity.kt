@@ -22,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.material3.TextField
+import androidx.compose.runtime.saveable.rememberSaveable
 import com.example.moviecounter.ui.theme.MovieCounterTheme
 
 class MainActivity : ComponentActivity() {
@@ -40,8 +41,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MovieCounter(modifier: Modifier = Modifier) {
-    var count by remember { mutableStateOf(0) }
-    var movieName by remember { mutableStateOf("") }
+    var count by rememberSaveable { mutableStateOf(0) }
+    var movieName by rememberSaveable { mutableStateOf("") }
 
     Column(
         modifier = modifier.padding(16.dp),
